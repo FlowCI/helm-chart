@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: flowci-mongodb
-          image: mongo:4.2
+          image: mongo:6
           volumeMounts:
             - mountPath: "/data/db"
               name: data

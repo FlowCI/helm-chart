@@ -45,8 +45,8 @@ minio:
   fullnameOverride: "flowci-minio"
   mode: "standalone"
   auth:
-    rootUser: "admin"
-    rootPassword: "12345"
+    rootUser: "minio"
+    rootPassword: "minio123"
   persistence:
     size: 8Gi
   

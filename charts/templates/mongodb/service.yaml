@@ -8,7 +8,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 27017
-      targetPort: tcp
+      targetPort: 27017
       protocol: TCP
       name: tcp
   selector:

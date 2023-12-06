@@ -32,9 +32,9 @@ spec:
             - name: "FLOWCI_MINIO_ENDPOINT"
               value: "http://flowci-minio:9000"
             - name: "FLOWCI_MINIO_KEY"
-              value: "minio"
+              value: {{ .Values.minio.auth.rootUser }}
             - name: "FLOWCI_MINIO_SECRET"
-              value: "minio123"
+              value: {{ .Values.minio.auth.rootPassword }}
           command: [
             "./wait_for_it.sh",
             "flowci-rabbitmq:5672",
@@ -49,7 +49,7 @@ spec:
             "-Xmn900m",
             "-XX:SurvivorRatio=5",
             "-jar",
-            "flow-ci-core.jar",
+            "flowci-core.jar",
           ]
           ports:
             - name: http

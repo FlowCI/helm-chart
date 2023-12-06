@@ -15,20 +15,22 @@ spec:
     spec:
       containers:
         - name: flowci-minio
-          image: minio/minio:RELEASE.2021-06-07T21-40-51Z
+          image: quay.io/minio/minio:RELEASE.2023-12-02T10-51-33Z
           env:
-            - name: "MINIO_ACCESS_KEY"
-              value: "minio"
-            - name: "MINIO_SECRET_KEY"
-              value: "minio123"
-          command: ["minio"]
-          args: ["server", "/data"]
+            - name: "MINIO_ROOT_USER"
+              value: {{ .Values.minio.auth.rootUser }}
+            - name: "MINIO_ROOT_PASSWORD"
+              value: {{ .Values.minio.auth.rootPassword }}
+          command: ["minio", "server", "/data", "--console-address", ":9090"]
           volumeMounts:
             - mountPath: "/data"
               name: data
           ports:
             - name: tcp
               containerPort: 9000
+              protocol: TCP
+            - name: protal
+              containerPort: 9090
               protocol: TCP
       volumes:
         - name: data
