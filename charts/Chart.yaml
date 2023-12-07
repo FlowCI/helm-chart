@@ -2,10 +2,11 @@ apiVersion: v2
 name: flow.ci
 description: Helm chart for flow.ci
 type: application
-version: "0.1.0"
-appVersion: "1.22.12"
+version: "1.23.49"
+appVersion: "1.23.49"
 keywords:
-  - CICD
+  - CI
+  - CD
 home: https://flowci.github.io
 icon: https://github.com/FlowCI/docs/raw/master/_images/logo.png
 sources:
