@@ -16,14 +16,35 @@ spec:
       containers:
         - name: flowci-mongodb
           image: mongo:6
+          command: ["/usr/bin/mongod", "--dbpath", "/data/db", "--port", "27017", "--replSet", "rs0", "--bind_ip_all"]
           volumeMounts:
             - mountPath: "/data/db"
-              name: data
+              name: mongodb-data
           ports:
             - name: tcp
               containerPort: 27017
               protocol: TCP
+
+        # container to run init mongodb cluster
+        - name: flowci-mongodb-setup
+          image: flowci/mongosh
+          env:
+            - name: "MONGODB_USER"
+              value: {{ .Values.mongodb.auth.user }}
+            - name: "MONGODB_PASS"
+              value: {{ .Values.mongodb.auth.pass }}
+          command: ["/ws/mongo_init.sh"]
+          volumeMounts:
+            - mountPath: /ws/mongo_init.sh
+              subPath: mongo_init.sh
+              name: mongodb-init
+          
       volumes:
-        - name: data
+        - name: mongodb-data
           persistentVolumeClaim:
             claimName: flowci-mongodb-data
+        
+        - name: mongodb-init
+          configMap:
+            name: flowci-mongodb-init
+            defaultMode: 0744

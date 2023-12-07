@@ -18,9 +18,9 @@ spec:
           image: rabbitmq:3.8
           env:
             - name: "RABBITMQ_DEFAULT_USER"
-              value: "admin"
+              value: {{ .Values.rabbitmq.auth.user }}
             - name: "RABBITMQ_DEFAULT_PASS"
-              value: "admin"
+              value: {{ .Values.rabbitmq.auth.pass }}
           volumeMounts:
             - mountPath: "/var/lib/rabbitmq"
               name: data

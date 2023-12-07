@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flowci-mongodb-init
+data:
+  mongo_init.sh: |-
+    #!/usr/bin/env bash
+    sleep 20
+    mongosh localhost:27017/admin --eval "rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'localhost:27017'}]})"
+    mongosh localhost:27017/admin --eval "db.createUser({user:'${MONGODB_USER}', pwd:'${MONGODB_PASS}', roles:[{role:'root',db:'admin'}]})"
+    tail -f /dev/null

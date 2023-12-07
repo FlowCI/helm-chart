@@ -35,11 +35,17 @@ mongodb:
   fullnameOverride: "flowci-mongodb"
   persistence:
     size: 4Gi
+  auth:
+    user: flowci
+    pass: flowci
 
 rabbitmq:
   fullnameOverride: "flowci-rabbitmq"
   persistence:
     size: 1Gi
+  auth:
+    user: "admin"
+    pass: "admin"
 
 minio:
   fullnameOverride: "flowci-minio"
